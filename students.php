@@ -1,3 +1,21 @@
+<?php
+
+$server ="localhost";
+$username ="root";
+$password ="";
+$database ="web2";
+
+$conn =mysqli_connect($server ,$username,$password ,$database);
+
+$sqlQuery =mysqli_query($conn,"SELECT *FROM enrollment");
+
+
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,7 +69,7 @@
                       
 					</div>
 					<div class="card-body">
-						<table class="table table-striped table-hover teble-responsive">
+						<table class="table table-striped table-hover teble-responsive  table table-sm">
 							<th>
 								<tr>
 									<th>No.</th>
@@ -65,26 +83,33 @@
 								</tr>
 							</th>
 							<tbody>
-								<tr>
-									<td>1.</td>
-									<td>Sam Mambo</td>
-									<td>0710406320</td>
-									<td>samuel@yahoo.com</td>
-									<td>Male</td>
-									<td> Web Design</td>
-									<td>23 jul 2022</td>
-									<td>
-										<a href="#" class="btn btn-primary  btn-sm">
+								<?php while($fetchRecords=mysqli_fetch_array($sqlQuery)) { ?>
+									<tr>
+										<td><?php echo  $fetchRecords['no']?> </td>
+										
+										<td><?php echo  $fetchRecords['fullname']?> </td>
+										<td><?php echo  $fetchRecords['phonenumber']?> </td>
+										<td><?php echo  $fetchRecords['emailaddress']?> </td>
+										<td><?php echo  $fetchRecords['gender']?> </td>
+										<td><?php echo  $fetchRecords['course']?> </td>
+										<td><?php echo  $fetchRecords['created-at']?> </td>
+										<td>
+										<a href="" class="btn btn-primary">
 											<i class="fa fa-edit"></i>
+									    </a>
+										<a href="" class="btn btn-info">
+											<i class="fa fa-eye"></i>
+									    </a>
+										<a href="" class="btn btn-danger">
+											<i class="fa fa-trash"></i>
+									    </a>
+
+										</td>
 										</a>
-										<a href="#" class="btn btn-info  btn-sm">
-										<i class="fa fa-eye"></i>
-										</a>
-										<a href="#" class="btn btn-danger  btn-sm">
-										<i class="fa fa-trash"></i>
-										</a>
-									</td>
-								</tr>
+										</td>
+									</tr>
+
+								<?php } ?>
 							</tbody>
 							
 						</table>
